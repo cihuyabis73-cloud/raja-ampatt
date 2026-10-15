@@ -1,1342 +1,552 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Raja Ampat - Surga Bawah Laut Indonesia</title>
-
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
-    <!-- Pure CSS Styling -->
-    <style>
-        /* ==========================================
-           RESET & DESIGN TOKENS
-           ========================================== */
-        *, *::before, *::after {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        :root {
-            --bg-dark: #020617;
-            --bg-card: rgba(15, 23, 42, 0.75);
-            --bg-surface: #0f172a;
-            
-            --primary: #0d9488;
-            --primary-hover: #14b8a6;
-            --accent-cyan: #22d3ee;
-            --accent-emerald: #10b981;
-            
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --text-sub: #cbd5e1;
-            
-            --border-glass: rgba(255, 255, 255, 0.08);
-            --border-accent: rgba(13, 148, 136, 0.3);
-            
-            --font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-            --radius-lg: 24px;
-            --radius-md: 16px;
-            --radius-sm: 8px;
-            
-            --shadow-glow: 0 10px 30px -10px rgba(13, 148, 136, 0.3);
-        }
-
-        html {
-            scroll-behavior: smooth;
-            font-family: var(--font-family);
-            background-color: var(--bg-dark);
-            color: var(--text-main);
-            line-height: 1.6;
-        }
-
-        body {
-            overflow-x: hidden;
-        }
-
-        a {
-            color: inherit;
-            text-decoration: none;
-        }
-
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-        ::-webkit-scrollbar-track {
-            background: var(--bg-dark);
-        }
-        ::-webkit-scrollbar-thumb {
-            background: var(--primary);
-            border-radius: 5px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--primary-hover);
-        }
-
-        /* Utility Layouts */
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
-
-        .section-padding {
-            padding: 100px 0;
-        }
-
-        /* Glassmorphism Effect */
-        .glass {
-            background: var(--bg-card);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid var(--border-glass);
-        }
-
-        /* Section Titles */
-        .section-header {
-            text-align: center;
-            max-width: 700px;
-            margin: 0 auto 60px auto;
-        }
-
-        .badge {
-            display: inline-block;
-            padding: 6px 16px;
-            border-radius: 50px;
-            background: rgba(13, 148, 136, 0.15);
-            border: 1px solid var(--border-accent);
-            color: var(--accent-cyan);
-            font-size: 0.8rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            margin-bottom: 16px;
-        }
-
-        .section-title {
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: var(--text-main);
-            letter-spacing: -0.5px;
-            margin-bottom: 16px;
-        }
-
-        .section-subtitle {
-            font-size: 1.05rem;
-            color: var(--text-muted);
-        }
-
-        /* Gradient Text */
-        .text-gradient {
-            background: linear-gradient(135deg, var(--accent-cyan), var(--primary-hover), var(--accent-emerald));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        /* Buttons */
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            padding: 14px 32px;
-            border-radius: 50px;
-            font-size: 0.95rem;
-            font-weight: 700;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            border: none;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary), var(--accent-emerald));
-            color: #ffffff;
-            box-shadow: var(--shadow-glow);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 35px -10px rgba(13, 148, 136, 0.5);
-            background: linear-gradient(135deg, var(--primary-hover), var(--accent-emerald));
-        }
-
-        .btn-secondary {
-            background: var(--bg-surface);
-            color: var(--text-main);
-            border: 1px solid var(--border-glass);
-        }
-
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.1);
-            transform: translateY(-3px);
-        }
-
-        /* ==========================================
-           1. NAVIGATION BAR
-           ========================================== */
-        .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 80px;
-            z-index: 1000;
-            background: rgba(2, 6, 23, 0.85);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--border-glass);
-            display: flex;
-            align-items: center;
-        }
-
-        .nav-container {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            width: 100%;
-        }
-
-        .brand-logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-size: 1.3rem;
-            font-weight: 800;
-            color: var(--text-main);
-        }
-
-        .logo-icon {
-            width: 38px;
-            height: 38px;
-            border-radius: 12px;
-            background: linear-gradient(135deg, var(--primary), var(--accent-cyan));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--bg-dark);
-            font-weight: 900;
-            font-size: 1.2rem;
-        }
-
-        .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 32px;
-            list-style: none;
-        }
-
-        .nav-link {
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: var(--text-sub);
-            transition: color 0.3s ease;
-        }
-
-        .nav-link:hover {
-            color: var(--accent-cyan);
-        }
-
-        /* CSS Mobile Navigation Toggle (Checkbox Hack) */
-        .nav-toggle {
-            display: none;
-        }
-
-        .nav-toggle-label {
-            display: none;
-            flex-direction: column;
-            gap: 6px;
-            cursor: pointer;
-            padding: 8px;
-        }
-
-        .nav-toggle-label span {
-            display: block;
-            width: 26px;
-            height: 2px;
-            background-color: var(--text-main);
-            border-radius: 2px;
-            transition: all 0.3s ease;
-        }
-
-        /* ==========================================
-           2. HERO BANNER
-           ========================================== */
-        .hero {
-            position: relative;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding-top: 80px;
-            background: linear-gradient(to bottom, rgba(2, 6, 23, 0.45), rgba(2, 6, 23, 0.98)),
-                        url('https://images.unsplash.com/photo-1516690561799-46d8f74f9abf?auto=format&fit=crop&w=2000&q=80') center/cover no-repeat fixed;
-            text-align: center;
-        }
-
-        .hero-content {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .hero-title {
-            font-size: 3.8rem;
-            font-weight: 800;
-            line-height: 1.15;
-            letter-spacing: -1px;
-            margin-bottom: 24px;
-        }
-
-        .hero-description {
-            font-size: 1.2rem;
-            color: var(--text-sub);
-            max-width: 750px;
-            margin: 0 auto 36px auto;
-            font-weight: 400;
-        }
-
-        .hero-buttons {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 16px;
-            margin-bottom: 60px;
-        }
-
-        .hero-stats {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 16px;
-            max-width: 850px;
-            margin: 0 auto;
-        }
-
-        .stat-card {
-            padding: 20px;
-            border-radius: var(--radius-md);
-            text-align: center;
-        }
-
-        .stat-number {
-            font-size: 2rem;
-            font-weight: 800;
-            color: var(--accent-cyan);
-            display: block;
-        }
-
-        .stat-label {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            margin-top: 4px;
-        }
-
-        /* ==========================================
-           3. OVERVIEW / ABOUT SECTION
-           ========================================== */
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
-        }
-
-        .about-text {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .about-text p {
-            color: var(--text-sub);
-            font-size: 1.05rem;
-            line-height: 1.8;
-        }
-
-        .feature-list {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
-            margin-top: 10px;
-        }
-
-        .feature-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            font-size: 0.95rem;
-            color: var(--text-main);
-        }
-
-        .feature-bullet {
-            width: 22px;
-            height: 22px;
-            border-radius: 50%;
-            background: rgba(13, 148, 136, 0.2);
-            border: 1px solid var(--primary);
-            color: var(--accent-cyan);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.75rem;
-            font-weight: bold;
-            flex-shrink: 0;
-            margin-top: 2px;
-        }
-
-        .about-image-wrapper {
-            position: relative;
-            border-radius: var(--radius-lg);
-            overflow: hidden;
-            border: 1px solid var(--border-glass);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-        }
-
-        .about-image-wrapper img {
-            width: 100%;
-            height: 480px;
-            object-fit: cover;
-            display: block;
-            transition: transform 0.6s ease;
-        }
-
-        .about-image-wrapper:hover img {
-            transform: scale(1.05);
-        }
-
-        .about-image-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: 30px;
-            background: linear-gradient(to top, var(--bg-dark), transparent);
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-        }
-
-        /* ==========================================
-           4. KEY ATTRACTIONS
-           ========================================== */
-        .attractions-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 28px;
-        }
-
-        .attraction-card {
-            border-radius: var(--radius-lg);
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            transition: transform 0.4s ease, border-color 0.4s ease;
-        }
-
-        .attraction-card:hover {
-            transform: translateY(-8px);
-            border-color: var(--border-accent);
-        }
-
-        .attraction-img-box {
-            position: relative;
-            height: 240px;
-            overflow: hidden;
-        }
-
-        .attraction-img-box img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.6s ease;
-        }
-
-        .attraction-card:hover .attraction-img-box img {
-            transform: scale(1.1);
-        }
-
-        .location-tag {
-            position: absolute;
-            top: 16px;
-            left: 16px;
-            padding: 6px 14px;
-            border-radius: 50px;
-            background: rgba(2, 6, 23, 0.8);
-            backdrop-filter: blur(8px);
-            color: var(--accent-cyan);
-            font-size: 0.75rem;
-            font-weight: 700;
-            border: 1px solid var(--border-glass);
-        }
-
-        .attraction-content {
-            padding: 24px;
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-            justify-content: space-between;
-        }
-
-        .attraction-title {
-            font-size: 1.3rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-
-        .attraction-desc {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            line-height: 1.6;
-            margin-bottom: 20px;
-        }
-
-        .attraction-footer {
-            padding-top: 16px;
-            border-top: 1px solid var(--border-glass);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.8rem;
-            color: var(--text-muted);
-        }
-
-        /* ==========================================
-           5. GALLERY & CREDIT LINKS
-           ========================================== */
-        .gallery-section {
-            background: rgba(15, 23, 42, 0.4);
-            border-top: 1px solid var(--border-glass);
-            border-bottom: 1px solid var(--border-glass);
-        }
-
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-        }
-
-        .gallery-item {
-            position: relative;
-            height: 260px;
-            border-radius: var(--radius-md);
-            overflow: hidden;
-            border: 1px solid var(--border-glass);
-            display: block;
-        }
-
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .gallery-item:hover img {
-            transform: scale(1.08);
-        }
-
-        .gallery-overlay {
-            position: absolute;
-            inset: 0;
-            background: rgba(2, 6, 23, 0.6);
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            padding: 20px;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .gallery-item:hover .gallery-overlay {
-            opacity: 1;
-        }
-
-        .gallery-title {
-            font-size: 1rem;
-            font-weight: 700;
-            color: var(--text-main);
-        }
-
-        .credit-link {
-            font-size: 0.75rem;
-            color: var(--accent-cyan);
-            margin-top: 4px;
-            text-decoration: underline;
-            display: inline-block;
-        }
-
-        .credit-link:hover {
-            color: #ffffff;
-        }
-
-        /* ==========================================
-           PURE CSS LIGHTBOX MODAL (USING :target)
-           ========================================== */
-        .lightbox {
-            position: fixed;
-            inset: 0;
-            z-index: 2000;
-            background: rgba(2, 6, 23, 0.95);
-            backdrop-filter: blur(16px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s ease;
-            padding: 20px;
-        }
-
-        /* Trigger lightbox on anchor target match */
-        .lightbox:target {
-            opacity: 1;
-            pointer-events: auto;
-        }
-
-        .lightbox-content {
-            position: relative;
-            max-width: 900px;
-            width: 100%;
-            background: var(--bg-surface);
-            border-radius: var(--radius-lg);
-            overflow: hidden;
-            border: 1px solid var(--border-glass);
-        }
-
-        .lightbox-img-box {
-            width: 100%;
-            max-height: 65vh;
-            background: #000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .lightbox-img-box img {
-            max-width: 100%;
-            max-height: 65vh;
-            object-fit: contain;
-        }
-
-        .lightbox-info {
-            padding: 20px 24px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: var(--bg-surface);
-        }
-
-        .lightbox-close {
-            position: absolute;
-            top: 16px;
-            right: 16px;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: rgba(2, 6, 23, 0.8);
-            border: 1px solid var(--border-glass);
-            color: #ffffff;
-            font-size: 1.2rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background 0.2s ease;
-        }
-
-        .lightbox-close:hover {
-            background: var(--primary);
-        }
-
-        /* ==========================================
-           6. VISITOR INFORMATION
-           ========================================== */
-        .info-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 28px;
-        }
-
-        .info-card {
-            padding: 32px;
-            border-radius: var(--radius-lg);
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
-        .info-icon {
-            width: 52px;
-            height: 52px;
-            border-radius: var(--radius-md);
-            background: rgba(13, 148, 136, 0.15);
-            border: 1px solid var(--border-accent);
-            color: var(--accent-cyan);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.4rem;
-        }
-
-        .info-title {
-            font-size: 1.25rem;
-            font-weight: 700;
-        }
-
-        .info-text {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            line-height: 1.6;
-        }
-
-        .info-list {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-top: 8px;
-            font-size: 0.85rem;
-        }
-
-        .info-list li {
-            display: flex;
-            justify-content: space-between;
-            padding-bottom: 8px;
-            border-bottom: 1px solid var(--border-glass);
-        }
-
-        .info-highlight {
-            color: var(--accent-cyan);
-            font-weight: 700;
-        }
-
-        /* Route Steps */
-        .route-steps {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-top: 8px;
-        }
-
-        .step-item {
-            display: flex;
-            gap: 12px;
-            font-size: 0.85rem;
-        }
-
-        .step-num {
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: var(--primary);
-            color: var(--text-main);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.7rem;
-            font-weight: 800;
-            flex-shrink: 0;
-            margin-top: 2px;
-        }
-
-        /* Map Embed Placeholder Box */
-        .map-box {
-            margin-top: 50px;
-            border-radius: var(--radius-lg);
-            padding: 32px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            gap: 16px;
-            background: linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(2, 6, 23, 0.9));
-        }
-
-        /* ==========================================
-           7. FOOTER & CONTACT
-           ========================================== */
-        .footer {
-            background: #01040f;
-            border-top: 1px solid var(--border-glass);
-            padding: 80px 0 30px 0;
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr;
-            gap: 60px;
-            margin-bottom: 60px;
-        }
-
-        .footer-brand p {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            margin-top: 16px;
-            max-width: 380px;
-        }
-
-        .footer-column-title {
-            font-size: 1rem;
-            font-weight: 700;
-            color: var(--text-main);
-            margin-bottom: 20px;
-        }
-
-        .footer-links {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .footer-link {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            transition: color 0.3s ease;
-        }
-
-        .footer-link:hover {
-            color: var(--accent-cyan);
-        }
-
-        .footer-bottom {
-            padding-top: 30px;
-            border-top: 1px solid var(--border-glass);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.8rem;
-            color: var(--text-muted);
-        }
-
-        /* ==========================================
-           RESPONSIVE MEDIA QUERIES
-           ========================================== */
-        @media (max-width: 1024px) {
-            .hero-title {
-                font-size: 3rem;
-            }
-            .about-grid {
-                grid-template-columns: 1fr;
-                gap: 40px;
-            }
-            .attractions-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .gallery-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .info-grid {
-                grid-template-columns: 1fr;
-            }
-            .footer-grid {
-                grid-template-columns: 1fr;
-                gap: 40px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .nav-toggle-label {
-                display: flex;
-            }
-
-            .nav-links {
-                position: fixed;
-                top: 80px;
-                left: 0;
-                right: 0;
-                background: var(--bg-surface);
-                flex-direction: column;
-                padding: 30px;
-                border-bottom: 1px solid var(--border-glass);
-                gap: 20px;
-                transform: translateY(-150%);
-                transition: transform 0.4s ease;
-            }
-
-            /* Checkbox hack activation */
-            .nav-toggle:checked ~ .nav-links {
-                transform: translateY(0);
-            }
-
-            .nav-toggle:checked ~ .nav-toggle-label span:nth-child(1) {
-                transform: rotate(45deg) translate(5px, 6px);
-            }
-            .nav-toggle:checked ~ .nav-toggle-label span:nth-child(2) {
-                opacity: 0;
-            }
-            .nav-toggle:checked ~ .nav-toggle-label span:nth-child(3) {
-                transform: rotate(-45deg) translate(5px, -6px);
-            }
-
-            .hero-title {
-                font-size: 2.2rem;
-            }
-            .hero-description {
-                font-size: 1rem;
-            }
-            .hero-buttons {
-                flex-direction: column;
-            }
-            .btn {
-                width: 100%;
-            }
-            .hero-stats {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .attractions-grid {
-                grid-template-columns: 1fr;
-            }
-            .gallery-grid {
-                grid-template-columns: 1fr;
-            }
-            .footer-bottom {
-                flex-direction: column;
-                gap: 12px;
-                text-align: center;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Santorini, Yunani - Pesona Surga Aegean</title>
+  <style>
+    /* ==========================================
+       RESET & VARIABLES
+       ========================================== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    :root {
+      --primary-blue: #0056b3;
+      --aegean-blue: #0077be;
+      --sky-blue: #e6f2ff;
+      --pure-white: #ffffff;
+      --dark-text: #1a252f;
+      --light-text: #6c757d;
+      --accent-gold: #f39c12;
+      --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    }
+
+    body {
+      background-color: #f8f9fa;
+      color: var(--dark-text);
+      line-height: 1.6;
+    }
+
+    /* ==========================================
+       NAVBAR
+       ========================================== */
+    nav {
+      background-color: var(--pure-white);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    nav .logo {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--primary-blue);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 20px;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: var(--dark-text);
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: color 0.3s;
+    }
+
+    nav ul li a:hover {
+      color: var(--aegean-blue);
+    }
+
+    /* ==========================================
+       HERO SECTION
+       ========================================== */
+    .hero {
+      position: relative;
+      height: 85vh;
+      min-height: 500px;
+      background: linear-gradient(rgba(0, 40, 85, 0.5), rgba(0, 40, 85, 0.5)),
+                  url('https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: var(--pure-white);
+      padding: 0 20px;
+    }
+
+    .hero-content {
+      max-width: 800px;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background-color: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(8px);
+      padding: 6px 18px;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 15px;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+    }
+
+    .hero h1 {
+      font-size: 3.8rem;
+      font-weight: 800;
+      margin-bottom: 15px;
+      text-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+
+    .hero p {
+      font-size: 1.25rem;
+      margin-bottom: 30px;
+      font-weight: 300;
+    }
+
+    .btn-hero {
+      display: inline-block;
+      background-color: var(--aegean-blue);
+      color: var(--pure-white);
+      padding: 14px 32px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0, 119, 190, 0.4);
+    }
+
+    .btn-hero:hover {
+      background-color: var(--primary-blue);
+      transform: translateY(-3px);
+    }
+
+    /* ==========================================
+       CONTAINER & SECTIONS
+       ========================================== */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 60px 20px;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 45px;
+    }
+
+    .section-title h2 {
+      font-size: 2.2rem;
+      color: var(--primary-blue);
+      margin-bottom: 10px;
+    }
+
+    .section-title p {
+      color: var(--light-text);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* ABOUT GRID */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+      margin-bottom: 70px;
+    }
+
+    .about-text h3 {
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+      color: var(--dark-text);
+    }
+
+    .about-text p {
+      margin-bottom: 15px;
+      color: #555;
+      text-align: justify;
+    }
+
+    .about-image {
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .about-image img {
+      width: 100%;
+      height: 360px;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* STATS BOX */
+    .stats-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      margin-top: 25px;
+    }
+
+    .stat-box {
+      background-color: var(--sky-blue);
+      padding: 15px;
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    .stat-box strong {
+      display: block;
+      font-size: 1.3rem;
+      color: var(--primary-blue);
+    }
+
+    .stat-box span {
+      font-size: 0.85rem;
+      color: var(--light-text);
+    }
+
+    /* GALLERY GRID */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin-bottom: 70px;
+    }
+
+    .card {
+      background: var(--pure-white);
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+    }
+
+    .card-img-wrap {
+      position: relative;
+      height: 220px;
+    }
+
+    .card-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .card-credit {
+      position: absolute;
+      bottom: 8px;
+      right: 8px;
+      background: rgba(0,0,0,0.6);
+      color: #fff;
+      font-size: 0.7rem;
+      padding: 3px 8px;
+      border-radius: 4px;
+    }
+
+    .card-credit a {
+      color: #fff;
+      text-decoration: underline;
+    }
+
+    .card-body {
+      padding: 20px;
+    }
+
+    .card-body h4 {
+      font-size: 1.3rem;
+      margin-bottom: 8px;
+      color: var(--primary-blue);
+    }
+
+    .card-body p {
+      font-size: 0.95rem;
+      color: #666;
+      margin-bottom: 15px;
+    }
+
+    /* MODAL BUTTON & TARGET (CSS ONLY) */
+    .modal-btn {
+      display: inline-block;
+      background-color: var(--aegean-blue);
+      color: #fff;
+      padding: 8px 18px;
+      border-radius: 20px;
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 500;
+    }
+
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      z-index: 1000;
+    }
+
+    .modal:target {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-content {
+      background: #fff;
+      padding: 30px;
+      border-radius: 15px;
+      max-width: 500px;
+      width: 90%;
+      position: relative;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      font-size: 1.5rem;
+      text-decoration: none;
+      color: #aaa;
+      font-weight: bold;
+    }
+
+    /* ACCORDION (<details> & <summary>) */
+    .faq-section {
+      background: var(--pure-white);
+      padding: 35px;
+      border-radius: 15px;
+      box-shadow: var(--shadow);
+    }
+
+    details {
+      margin-bottom: 12px;
+      border: 1px solid #eee;
+      border-radius: 8px;
+      padding: 15px;
+      background-color: #fafafa;
+    }
+
+    summary {
+      font-weight: 600;
+      font-size: 1.05rem;
+      cursor: pointer;
+      color: var(--primary-blue);
+      outline: none;
+    }
+
+    details p {
+      margin-top: 10px;
+      color: #555;
+      font-size: 0.95rem;
+    }
+
+    /* ==========================================
+       FOOTER
+       ========================================== */
+    footer {
+      background-color: var(--primary-blue);
+      color: #fff;
+      text-align: center;
+      padding: 30px 20px;
+      margin-top: 60px;
+    }
+
+    footer p {
+      margin-bottom: 5px;
+      font-size: 0.95rem;
+    }
+
+    footer .creator {
+      font-weight: 700;
+      color: var(--accent-gold);
+      letter-spacing: 1px;
+    }
+
+    footer a {
+      color: #fff;
+      text-decoration: underline;
+    }
+
+    /* RESPONSIVE STYLES */
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2.5rem; }
+      .about-grid { grid-template-columns: 1fr; }
+      .stats-container { grid-template-columns: 1fr; }
+      nav ul { display: none; }
+    }
+  </style>
 </head>
 <body>
 
-    <!-- 1. NAVIGATION BAR -->
-    <nav class="navbar">
-        <div class="container nav-container">
-            <a href="#" class="brand-logo">
-                <div class="logo-icon">R</div>
-                <span>Raja<span style="color: var(--accent-cyan);">Ampat</span></span>
-            </a>
+  <!-- NAVBAR -->
+  <nav>
+    <div class="logo">Santorini</div>
+    <ul>
+      <li><a href="#tentang">Tentang</a></li>
+      <li><a href="#destinasi">Destinasi</a></li>
+      <li><a href="#panduan">Panduan</a></li>
+    </ul>
+  </nav>
 
-            <!-- Pure CSS Responsive Hamburger Toggle -->
-            <input type="checkbox" id="nav-toggle" class="nav-toggle">
-            <label for="nav-toggle" class="nav-toggle-label">
-                <span></span>
-                <span></span>
-                <span></span>
-            </label>
+  <!-- HERO SECTION -->
+  <header class="hero">
+    <div class="hero-content">
+      <span class="hero-badge">Laut Aegean, Yunani</span>
+      <h1>Santorini</h1>
+      <p>Rasakan keindahan arsitektur kubah biru yang ikonik dan pemandangan matahari terbenam terbaik di dunia.</p>
+      <a href="#tentang" class="btn-hero">Jelajahi Sekarang</a>
+    </div>
+  </header>
 
-            <ul class="nav-links">
-                <li><a href="#beranda" class="nav-link">Beranda</a></li>
-                <li><a href="#tentang" class="nav-link">Tentang</a></li>
-                <li><a href="#daya-tarik" class="nav-link">Daya Tarik</a></li>
-                <li><a href="#galeri" class="nav-link">Galeri Foto</a></li>
-                <li><a href="#info-kunjungan" class="nav-link">Info Kunjungan</a></li>
-                <li><a href="#kontak" class="btn btn-primary" style="padding: 8px 20px; font-size: 0.85rem;">Eksplorasi</a></li>
-            </ul>
+  <!-- MAIN CONTENT -->
+  <main class="container">
+    
+    <!-- TENTANG SANTORINI -->
+    <section class="about-grid" id="tentang">
+      <div class="about-text">
+        <h3>Keajaiban Laut Aegean</h3>
+        <p>Santorini (Thira) adalah salah satu pulau tercantik di Yunani. Dikenal dengan pemukiman bertingkat serba putih yang dibangun di atas tebing curam hasil kaldera letusan gunung berapi purba.</p>
+        <p>Kombinasi laut biru jernih, gereja berkubah biru, serta matahari terbenam di Oia menjadikannya destinasi impian wisatawan dari seluruh dunia.</p>
+        
+        <div class="stats-container">
+          <div class="stat-box">
+            <strong>28°C</strong>
+            <span>Suhu Musim Panas</span>
+          </div>
+          <div class="stat-box">
+            <strong>Kaldera</strong>
+            <span>Pemandangan Alami</span>
+          </div>
+          <div class="stat-box">
+            <strong>UNESCO</strong>
+            <span>Situs Warisan Dunia</span>
+          </div>
         </div>
-    </nav>
+      </div>
 
-    <!-- 2. HERO BANNER -->
-    <section id="beranda" class="hero">
-        <div class="container hero-content">
-            <div class="badge">Papua Barat Daya, Indonesia</div>
-            <h1 class="hero-title">
-                Surga Bawah Laut di <br>
-                <span class="text-gradient">Jantung Segitiga Karang Dunia</span>
-            </h1>
-            <p class="hero-description">
-                Selamat datang di Raja Ampat, gugusan kepulauan eksotis dengan keanekaragaman hayati laut terkaya di planet Bumi. Rasakan keajaiban lanskap karang purba dan perairan kristal tak tertandingi.
-            </p>
-
-            <div class="hero-buttons">
-                <a href="#tentang" class="btn btn-primary">
-                    <span>Jelajahi Pesona</span>
-                    <span>&darr;</span>
-                </a>
-                <a href="#galeri" class="btn btn-secondary">
-                    <span>Lihat Galeri Foto</span>
-                </a>
-            </div>
-
-            <div class="hero-stats">
-                <div class="stat-card glass">
-                    <span class="stat-number">75%</span>
-                    <span class="stat-label">Spesies Karang Dunia</span>
-                </div>
-                <div class="stat-card glass">
-                    <span class="stat-number">1.500+</span>
-                    <span class="stat-label">Spesies Ikan Laut</span>
-                </div>
-                <div class="stat-card glass">
-                    <span class="stat-number">1.600+</span>
-                    <span class="stat-label">Gugusan Pulau Karst</span>
-                </div>
-                <div class="stat-card glass">
-                    <span class="stat-number">UNESCO</span>
-                    <span class="stat-label">Global Geopark Site</span>
-                </div>
-            </div>
-        </div>
+      <div class="about-image">
+        <img src="https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=800&q=80" alt="Arsitektur Santorini Yunani">
+      </div>
     </section>
 
-    <!-- 3. OVERVIEW / ABOUT SECTION -->
-    <section id="tentang" class="section-padding">
-        <div class="container">
-            <div class="about-grid">
-                <div class="about-text">
-                    <div class="badge" style="margin-bottom: 0;">Legenda & Sekilas Tempat</div>
-                    <h2 class="section-title" style="text-align: left; margin-bottom: 0;">
-                        Mahakarya Alam Tersembunyi di Indonesia Timur
-                    </h2>
-                    <p>
-                        Nama <strong>Raja Ampat</strong> berasal dari legenda lokal masyarakat setempat yang mempercayai ditemukannya tujuh telur naga. Empat di antaranya menetas menjadi raja-raja yang memerintah empat pulau utama: <strong>Waigeo, Salawati, Batanta, dan Misool</strong>.
-                    </p>
-                    <p>
-                        Sebagai episentrum kawasan konservasi bahari dunia, kawasan perairan ini menyimpan lanskap alam pulau karst memukau, gua peninggalan purba, hingga ekosistem bawah laut yang dijaga ketat melaui adat kebudayaan lokal.
-                    </p>
-
-                    <ul class="feature-list">
-                        <li class="feature-item">
-                            <span class="feature-bullet">&check;</span>
-                            <span><strong>Habitat Satwa Endemik:</strong> Rumah bagi Burung Cenderawasih dan Hiu Berjalan (*Walking Shark*).</span>
-                        </li>
-                        <li class="feature-item">
-                            <span class="feature-bullet">&check;</span>
-                            <span><strong>Kawasan Konservasi Ketat:</strong> Perlindungan adat 'Sasi' yang melestarikan keaslian ekosistem alam.</span>
-                        </li>
-                        <li class="feature-item">
-                            <span class="feature-bullet">&check;</span>
-                            <span><strong>Destinasi Diving Kelas Dunia:</strong> Pengalaman menyelam terbaik di mana titik selam dikelilingi ribuan biota unik.</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="about-image-wrapper">
-                    <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1000&q=80" alt="Bawah Laut Raja Ampat">
-                    <div class="about-image-overlay">
-                        <div>
-                            <span class="badge" style="margin-bottom: 4px;">Diving Paradise</span>
-                            <h3 style="font-size: 1.1rem; font-weight: 700;">Terumbu Karang Murni</h3>
-                        </div>
-                        <a href="https://unsplash.com/photos/58e3b4079ab2" target="_blank" rel="noopener" style="font-size: 0.75rem; color: var(--accent-cyan);">Unsplash / David Clode &nearr;</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 4. KEY ATTRACTIONS -->
-    <section id="daya-tarik" class="section-padding" style="background: rgba(15, 23, 42, 0.3);">
-        <div class="container">
-            <div class="section-header">
-                <span class="badge">Destinasi Unggulan</span>
-                <h2 class="section-title">Daya Tarik Utama Raja Ampat</h2>
-                <p class="section-subtitle">Tiga spot ikonik berpanorama spektakuler yang menjadi tujuan utama wisatawan dari seluruh penjuru dunia.</p>
-            </div>
-
-            <div class="attractions-grid">
-                <!-- Card 1 -->
-                <div class="attraction-card glass">
-                    <div class="attraction-img-box">
-                        <img src="https://images.unsplash.com/photo-1516690561799-46d8f74f9abf?auto=format&fit=crop&w=800&q=80" alt="Bukit Piaynemo">
-                        <span class="location-tag">Kepulauan Waigeo</span>
-                    </div>
-                    <div class="attraction-content">
-                        <div>
-                            <h3 class="attraction-title">Bukit Piaynemo</h3>
-                            <p class="attraction-desc">
-                                Sering disebut sebagai versi mini Kepulauan Wayag. Pengunjung dapat menaiki 320 anak tangga kayu untuk menyaksikan lanskap pulau karst yang berada di atas air laut pirus.
-                            </p>
-                        </div>
-                        <div class="attraction-footer">
-                            <span>Aktivitas: Trekking, Foto</span>
-                            <span style="color: var(--accent-cyan); font-weight: 700;">Spot Ikonik &#9733;</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Card 2 -->
-                <div class="attraction-card glass">
-                    <div class="attraction-img-box">
-                        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80" alt="Kepulauan Wayag">
-                        <span class="location-tag">Utara Raja Ampat</span>
-                    </div>
-                    <div class="attraction-content">
-                        <div>
-                            <h3 class="attraction-title">Kepulauan Wayag</h3>
-                            <p class="attraction-desc">
-                                Simbol keagungan Raja Ampat berupa gugusan gunung batu karang besar yang mencuat langsung dari laut dangkal yang jernih, tempat berlindung anakan hiu sirip hitam.
-                            </p>
-                        </div>
-                        <div class="attraction-footer">
-                            <span>Aktivitas: Rock Climbing, Boat Tour</span>
-                            <span style="color: var(--accent-cyan); font-weight: 700;">Eksklusif &#9733;</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Card 3 -->
-                <div class="attraction-card glass">
-                    <div class="attraction-img-box">
-                        <img src="https://images.unsplash.com/photo-1682687220063-4742bd7fd538?auto=format&fit=crop&w=800&q=80" alt="Manta Sandy">
-                        <span class="location-tag">Selat Dampier</span>
-                    </div>
-                    <div class="attraction-content">
-                        <div>
-                            <h3 class="attraction-title">Manta Sandy & Misool</h3>
-                            <p class="attraction-desc">
-                                Titik penyelaman ternama untuk berenang bersama Ikan Pari Manta raksasa (*Manta Cleaning Station*) serta mengeksplorasi danau ubur-ubur tidak menyengat di Misool.
-                            </p>
-                        </div>
-                        <div class="attraction-footer">
-                            <span>Aktivitas: Snorkeling, Diving</span>
-                            <span style="color: var(--accent-cyan); font-weight: 700;">World-Class &#9733;</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 5. PHOTO GALLERY & CREDITS -->
-    <section id="galeri" class="section-padding gallery-section">
-        <div class="container">
-            <div class="section-header">
-                <span class="badge">Dokumentasi Visual</span>
-                <h2 class="section-title">Galeri Foto & Kredit Sumber</h2>
-                <p class="section-subtitle">Klik pada foto untuk memperbesar tampilan menggunakan fitur lightbox murni CSS tanpa JavaScript.</p>
-            </div>
-
-            <div class="gallery-grid">
-                <!-- Gallery Item 1 -->
-                <a href="#lightbox-1" class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1516690561799-46d8f74f9abf?auto=format&fit=crop&w=600&q=80" alt="Gugusan Pulau Karst">
-                    <div class="gallery-overlay">
-                        <h4 class="gallery-title">Gugusan Pulau Karst</h4>
-                        <span class="credit-link">Foto oleh Pexels / Unsplash</span>
-                    </div>
-                </a>
-
-                <!-- Gallery Item 2 -->
-                <a href="#lightbox-2" class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=600&q=80" alt="Terumbu Karang & Biota Laut">
-                    <div class="gallery-overlay">
-                        <h4 class="gallery-title">Terumbu Karang Murni</h4>
-                        <span class="credit-link">Foto oleh David Clode / Unsplash</span>
-                    </div>
-                </a>
-
-                <!-- Gallery Item 3 -->
-                <a href="#lightbox-3" class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80" alt="Pasir Putih Pesisir">
-                    <div class="gallery-overlay">
-                        <h4 class="gallery-title">Pasir Putih Pesisir</h4>
-                        <span class="credit-link">Foto oleh Sean Oulashin / Unsplash</span>
-                    </div>
-                </a>
-
-                <!-- Gallery Item 4 -->
-                <a href="#lightbox-4" class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?auto=format&fit=crop&w=600&q=80" alt="Sunset Kepulauan">
-                    <div class="gallery-overlay">
-                        <h4 class="gallery-title">Sunset Kepulauan</h4>
-                        <span class="credit-link">Foto oleh Azeem Rajab / Unsplash</span>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- PURE CSS LIGHTBOX MODALS (USING CSS :target) -->
-    <!-- Lightbox 1 -->
-    <div id="lightbox-1" class="lightbox">
-        <div class="lightbox-content">
-            <a href="#galeri" class="lightbox-close">&times;</a>
-            <div class="lightbox-img-box">
-                <img src="https://images.unsplash.com/photo-1516690561799-46d8f74f9abf?auto=format&fit=crop&w=1200&q=80" alt="Gugusan Pulau Karst">
-            </div>
-            <div class="lightbox-info">
-                <div>
-                    <h4 style="font-weight: 700;">Gugusan Pulau Karst Piaynemo</h4>
-                    <p style="font-size: 0.8rem; color: var(--text-muted);">Pemandangan alam ikonik Raja Ampat dari puncak karts.</p>
-                </div>
-                <a href="https://unsplash.com/photos/58e3b4079ab2" target="_blank" rel="noopener" class="credit-link">Lihat di Unsplash &nearr;</a>
-            </div>
-        </div>
+    <!-- DESTINASI IKONIK -->
+    <div class="section-title" id="destinasi">
+      <h2>Spot Populer Santorini</h2>
+      <p>Destinasi unggulan yang wajib kamu kunjungi saat berlibur ke Yunani.</p>
     </div>
 
-    <!-- Lightbox 2 -->
-    <div id="lightbox-2" class="lightbox">
-        <div class="lightbox-content">
-            <a href="#galeri" class="lightbox-close">&times;</a>
-            <div class="lightbox-img-box">
-                <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1200&q=80" alt="Terumbu Karang">
-            </div>
-            <div class="lightbox-info">
-                <div>
-                    <h4 style="font-weight: 700;">Keanekaragaman Terumbu Karang</h4>
-                    <p style="font-size: 0.8rem; color: var(--text-muted);">Taman laut alami terlindungi di kepulauan Papua.</p>
-                </div>
-                <a href="https://unsplash.com/photos/58e3b4079ab2" target="_blank" rel="noopener" class="credit-link">Lihat di Unsplash &nearr;</a>
-            </div>
+    <section class="gallery-grid">
+      
+      <!-- Kartu 1 -->
+      <article class="card">
+        <div class="card-img-wrap">
+          <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80" alt="Desa Oia">
+          <div class="card-credit">Foto: <a href="https://unsplash.com" target="_blank" rel="noopener">Unsplash</a></div>
         </div>
-    </div>
-
-    <!-- Lightbox 3 -->
-    <div id="lightbox-3" class="lightbox">
-        <div class="lightbox-content">
-            <a href="#galeri" class="lightbox-close">&times;</a>
-            <div class="lightbox-img-box">
-                <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80" alt="Pasir Putih">
-            </div>
-            <div class="lightbox-info">
-                <div>
-                    <h4 style="font-weight: 700;">Perairan Pantai Eksotis</h4>
-                    <p style="font-size: 0.8rem; color: var(--text-muted);">Garis pantai berpasir putih halus bertemperatur hangat.</p>
-                </div>
-                <a href="https://unsplash.com/photos/58e3b4079ab2" target="_blank" rel="noopener" class="credit-link">Lihat di Unsplash &nearr;</a>
-            </div>
+        <div class="card-body">
+          <h4>Desa Oia</h4>
+          <p>Pusat pemandangan matahari terbenam paling romantis dengan arsitektur putih dan kincir angin ikonik.</p>
+          <a href="#modal-view" class="modal-btn">Lihat Detail</a>
         </div>
-    </div>
+      </article>
 
-    <!-- Lightbox 4 -->
-    <div id="lightbox-4" class="lightbox">
-        <div class="lightbox-content">
-            <a href="#galeri" class="lightbox-close">&times;</a>
-            <div class="lightbox-img-box">
-                <img src="https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?auto=format&fit=crop&w=1200&q=80" alt="Sunset Kepulauan">
-            </div>
-            <div class="lightbox-info">
-                <div>
-                    <h4 style="font-weight: 700;">Panorama Matahari Terbenam</h4>
-                    <p style="font-size: 0.8rem; color: var(--text-muted);">Suasana senja di atas perairan tenang kepulauan.</p>
-                </div>
-                <a href="https://unsplash.com/photos/58e3b4079ab2" target="_blank" rel="noopener" class="credit-link">Lihat di Unsplash &nearr;</a>
-            </div>
+      <!-- Kartu 2 -->
+      <article class="card">
+        <div class="card-img-wrap">
+          <img src="https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=600&q=80" alt="Kota Fira">
+          <div class="card-credit">Foto: <a href="https://unsplash.com" target="_blank" rel="noopener">Unsplash</a></div>
         </div>
-    </div>
-
-    <!-- 6. VISITOR INFORMATION -->
-    <section id="info-kunjungan" class="section-padding">
-        <div class="container">
-            <div class="section-header">
-                <span class="badge">Panduan Wisatawan</span>
-                <h2 class="section-title">Informasi Penting Kunjungan</h2>
-                <p class="section-subtitle">Beberapa hal teknis penting yang perlu disiapkan sebelum merencanakan liburan Anda ke Raja Ampat.</p>
-            </div>
-
-            <div class="info-grid">
-                <!-- Info 1 -->
-                <div class="info-card glass">
-                    <div class="info-icon">&#128179;</div>
-                    <h3 class="info-title">Kartu Pin & Tarif Masuk</h3>
-                    <p class="info-text">
-                        Setiap wisatawan wajib memiliki Kartu Pemeliharaan Jasa Lingkungan (PIN KBL) sebagai kontribusi pelestarian lingkungan:
-                    </p>
-                    <ul class="info-list">
-                        <li>
-                            <span>Wisatawan Nusantara (WNI)</span>
-                            <span class="info-highlight">Rp 425.000</span>
-                        </li>
-                        <li>
-                            <span>Wisatawan Manca (WNA)</span>
-                            <span class="info-highlight">Rp 1.000.000</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- Info 2 -->
-                <div class="info-card glass">
-                    <div class="info-icon">&#128197;</div>
-                    <h3 class="info-title">Waktu Terbaik Berkunjung</h3>
-                    <p class="info-text">
-                        Meskipun bisa dikunjungi sepanjang tahun, kondisi gelombang paling tenang berlangsung pada bulan-bulan berikut:
-                    </p>
-                    <ul class="info-list">
-                        <li>
-                            <span>Oktober – April</span>
-                            <span class="info-highlight">Musim Terbaik &#9733;</span>
-                        </li>
-                        <li>
-                            <span>Juni – Agustus</span>
-                            <span style="color: #f59e0b;">Musim Angin Selatan</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- Info 3 -->
-                <div class="info-card glass">
-                    <div class="info-icon">&#128674;</div>
-                    <h3 class="info-title">Panduan Akses Rute</h3>
-                    <p class="info-text">
-                        Perjalanan udara dan laut menuju pusat Kepulauan Raja Ampat:
-                    </p>
-                    <div class="route-steps">
-                        <div class="step-item">
-                            <span class="step-num">1</span>
-                            <span>Penerbangan menuju Kota Sorong (SOQ).</span>
-                        </div>
-                        <div class="step-item">
-                            <span class="step-num">2</span>
-                            <span>Kapal Cepat dari Pelabuhan Sorong ke Waisai (2 jam).</span>
-                        </div>
-                        <div class="step-item">
-                            <span class="step-num">3</span>
-                            <span>Speedboat kecil menuju Homestay atau Resort.</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Map Location Box -->
-            <div class="map-box glass">
-                <span class="badge" style="margin-bottom: 0;">Lokasi Geografis</span>
-                <h3 style="font-size: 1.5rem; font-weight: 700;">Kepulauan Raja Ampat, Papua Barat Daya</h3>
-                <p style="color: var(--text-muted); font-size: 0.9rem; max-width: 600px;">
-                    Koordinat Geografis: 0°14'0"S 130°31'0"E — Terletak di ujung barat pulau Papua, Indonesia.
-                </p>
-                <a href="https://maps.google.com/?q=Raja+Ampat" target="_blank" rel="noopener" class="btn btn-primary" style="margin-top: 8px;">
-                    <span>Buka di Google Maps &nearr;</span>
-                </a>
-            </div>
+        <div class="card-body">
+          <h4>Fira (Ibu Kota)</h4>
+          <p>Kota utama yang ramah wisatawan, penuh dengan toko souvenir, kafe tebing, serta kehidupan malam.</p>
+          <a href="#modal-view" class="modal-btn">Lihat Detail</a>
         </div>
+      </article>
+
+      <!-- Kartu 3 -->
+      <article class="card">
+        <div class="card-img-wrap">
+          <img src="https://images.unsplash.com/photo-1530841377377-3ff06c0ca713?auto=format&fit=crop&w=600&q=80" alt="Red Beach Santorini">
+          <div class="card-credit">Foto: <a href="https://unsplash.com" target="_blank" rel="noopener">Unsplash</a></div>
+        </div>
+        <div class="card-body">
+          <h4>Red Beach</h4>
+          <p>Pantai unik berbatu pasir vulkanik merah yang dikelilingi tebing tinggi yang eksotis.</p>
+          <a href="#modal-view" class="modal-btn">Lihat Detail</a>
+        </div>
+      </article>
+
     </section>
 
-    <!-- 7. FOOTER & CONTACT -->
-    <footer id="kontak" class="footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-brand">
-                    <a href="#" class="brand-logo">
-                        <div class="logo-icon">R</div>
-                        <span>Raja<span style="color: var(--accent-cyan);">Ampat</span></span>
-                    </a>
-                    <p>
-                        Website promosi pariwisata independen Raja Ampat, Papua Barat Daya. Menampilkan pesona alam nusantara untuk dunia.
-                    </p>
-                </div>
+    <!-- PANDUAN WISATA -->
+    <div class="section-title" id="panduan">
+      <h2>Panduan Perjalanan</h2>
+      <p>Informasi berguna sebelum merencanakan liburan kamu.</p>
+    </div>
 
-                <div>
-                    <h4 class="footer-column-title">Navigasi Halaman</h4>
-                    <ul class="footer-links">
-                        <li><a href="#beranda" class="footer-link">Beranda</a></li>
-                        <li><a href="#tentang" class="footer-link">Tentang Raja Ampat</a></li>
-                        <li><a href="#daya-tarik" class="footer-link">Daya Tarik Utama</a></li>
-                        <li><a href="#galeri" class="footer-link">Galeri Foto</a></li>
-                    </ul>
-                </div>
+    <section class="faq-section">
+      <details>
+        <summary>🗓️ Waktu Terbaik Berkunjung</summary>
+        <p>Bulan **Mei hingga Oktober** adalah waktu terbaik dengan cuaca cerah. Jika ingin menghindari keramaian, datanglah pada bulan Mei atau September.</p>
+      </details>
 
-                <div>
-                    <h4 class="footer-column-title">Informasi & Kredit</h4>
-                    <ul class="footer-links">
-                        <li><a href="#info-kunjungan" class="footer-link">Tiket Retribusi</a></li>
-                        <li><a href="https://unsplash.com" target="_blank" rel="noopener" class="footer-link">Sumber Foto: Unsplash</a></li>
-                        <li><a href="https://commons.wikimedia.org" target="_blank" rel="noopener" class="footer-link">Wikimedia Commons</a></li>
-                    </ul>
-                </div>
-            </div>
+      <details>
+        <summary>✈️ Akses Transportasi</summary>
+        <p>Bisa dijangkau melalui penerbangan ke Bandara Internasional Santorini (JTR) atau menggunakan kapal feri dari Pelabuhan Piraeus, Athena.</p>
+      </details>
 
-            <div class="footer-bottom">
-                <p>&copy; 2026 Pesona Wisata Raja Ampat. Dibuat oleh jawieerrr</p>
-                
-            </div>
-        </div>
-    </footer>
+      <details>
+        <summary>🏨 Rekomendasi Area Menginap</summary>
+        <p>Pilih **Oia** untuk suasana romantis dan mewah, atau **Fira** jika menginginkan lokasi strategis dan dekat dengan transportasi publik.</p>
+      </details>
+    </section>
+
+  </main>
+
+  <!-- MODAL CSS ONLY (`:target`) -->
+  <div id="modal-view" class="modal">
+    <div class="modal-content">
+      <a href="#" class="close-btn">&times;</a>
+      <h3 style="color: var(--primary-blue); margin-bottom: 10px;">Informasi Destinasi</h3>
+      <p style="color: #555; margin-bottom: 15px;">Santorini memiliki fasilitas pariwisata yang sangat lengkap mulai dari resor mewah, tur kapal mengelilingi kaldera, hingga wisata kuliner khas Yunani.</p>
+      <p style="font-size: 0.85rem; color: #888;">*Tips: Gunakan alas kaki yang nyaman karena banyak jalan berupa bukit dan tangga batu.*</p>
+    </div>
+  </div>
+
+  <!-- FOOTER CREDIT JAWIEER -->
+  <footer>
+    <p>&copy; 2026 Pesona Wisata Santorini - Yunani</p>
+    <p>Dibuat oleh <span class="creator">JAWIEER</span></p>
+    <p style="font-size: 0.8rem; opacity: 0.8; margin-top: 5px;">Sumber foto: <a href="https://unsplash.com" target="_blank" rel="noopener">Unsplash</a></p>
+  </footer>
 
 </body>
 </html>
