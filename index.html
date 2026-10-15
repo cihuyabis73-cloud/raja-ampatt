@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kepulauan Derawan & Labuan Cermin - Created by JAWIEER</title>
+  <title>Danau Labuan Cermin - Created by JAWIEER</title>
   <style>
     /* ==========================================
        RESET & VARIABLE STYLES
@@ -27,7 +27,6 @@
     }
 
     body {
-      background: #028090;
       background: linear-gradient(135deg, #05668d 0%, #028090 50%, #00a896 100%);
       color: #ffffff;
       min-height: 100vh;
@@ -42,7 +41,7 @@
       top: 0;
       left: 0;
       width: 100%;
-      background: rgba(5, 102, 141, 0.75);
+      background: rgba(5, 102, 141, 0.85);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--glass-border);
@@ -90,8 +89,8 @@
       position: relative;
       height: 90vh;
       min-height: 550px;
-      background: linear-gradient(to bottom, rgba(5, 102, 141, 0.4), rgba(5, 102, 141, 0.85)),
-                  url('https://i.ytimg.com/vi/8TZa0jzb_qI/maxresdefault.jpg') center/cover no-repeat;
+      background: linear-gradient(to bottom, rgba(5, 102, 141, 0.3), rgba(5, 102, 141, 0.9)),
+                  url('https://indonesiakaya.com/wp-content/uploads/2020/10/Danau_cantik_ini_terletak_di_Desa_Labuan_Kelambu_di_Kecamatan_Biduk-biduk.jpg') center/cover no-repeat;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -103,7 +102,6 @@
     .hero-badge {
       background: rgba(255, 255, 255, 0.2);
       backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
       border: 1px solid var(--glass-border);
       padding: 8px 20px;
       border-radius: 30px;
@@ -185,46 +183,86 @@
     }
 
     /* ==========================================
-       GLASSMORPHISM CARD GRID
+       PENJELASAN SECTION (GLASSMORPHISM)
        ========================================== */
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 30px;
-      margin-bottom: 80px;
-    }
-
-    .glass-card {
+    .about-box {
       background: var(--glass-bg);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       border: 1px solid var(--glass-border);
       border-radius: 20px;
+      padding: 40px;
+      box-shadow: var(--card-shadow);
+      margin-bottom: 80px;
+    }
+
+    .about-box h3 {
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      color: var(--sand-gold);
+    }
+
+    .about-box p {
+      font-size: 1.05rem;
+      margin-bottom: 20px;
+      color: rgba(255, 255, 255, 0.9);
+      line-height: 1.8;
+      text-align: justify;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-top: 30px;
+    }
+
+    .feature-item {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--glass-border);
+      padding: 20px;
+      border-radius: 15px;
+    }
+
+    .feature-item h4 {
+      color: var(--sand-gold);
+      font-size: 1.1rem;
+      margin-bottom: 8px;
+    }
+
+    /* ==========================================
+       GALERI 5 FOTO SECTION
+       ========================================== */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
+      margin-bottom: 80px;
+    }
+
+    .gallery-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
       overflow: hidden;
       box-shadow: var(--card-shadow);
-      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      transition: transform 0.4s ease;
     }
 
-    .glass-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+    .gallery-card:hover {
+      transform: translateY(-8px);
     }
 
-    .card-img {
+    .gallery-img {
       position: relative;
-      height: 230px;
-      overflow: hidden;
+      height: 240px;
     }
 
-    .card-img img {
+    .gallery-img img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform 0.5s ease;
-    }
-
-    .glass-card:hover .card-img img {
-      transform: scale(1.08);
     }
 
     .photo-credit {
@@ -232,41 +270,34 @@
       bottom: 10px;
       right: 10px;
       background: rgba(0, 0, 0, 0.6);
-      backdrop-filter: blur(4px);
       font-size: 0.7rem;
       padding: 4px 10px;
-      border-radius: 12px;
+      border-radius: 10px;
+    }
+
+    .photo-credit a { color: #fff; text-decoration: underline; }
+
+    .gallery-caption {
+      padding: 20px;
+    }
+
+    .gallery-caption h4 {
+      font-size: 1.2rem;
+      margin-bottom: 8px;
       color: #fff;
     }
 
-    .photo-credit a {
-      color: #fff;
-      text-decoration: underline;
-    }
-
-    .card-body {
-      padding: 25px;
-    }
-
-    .card-body h3 {
-      font-size: 1.4rem;
-      margin-bottom: 10px;
-      color: #ffffff;
-    }
-
-    .card-body p {
-      font-size: 0.95rem;
-      color: rgba(255, 255, 255, 0.85);
-      margin-bottom: 20px;
+    .gallery-caption p {
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255, 0.8);
     }
 
     /* ==========================================
-       DETAILS / AKORDEON CSS MURNI (<details>)
+       PANDUAN / AKORDEON (<details>)
        ========================================== */
     .info-box {
       background: var(--glass-bg);
       backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
       border: 1px solid var(--glass-border);
       border-radius: 20px;
       padding: 40px;
@@ -280,7 +311,6 @@
       border-radius: 12px;
       padding: 15px 20px;
       background: rgba(255, 255, 255, 0.05);
-      transition: background 0.3s ease;
     }
 
     details[open] {
@@ -291,7 +321,6 @@
       font-weight: 600;
       font-size: 1.1rem;
       cursor: pointer;
-      outline: none;
       color: var(--sand-gold);
     }
 
@@ -302,74 +331,7 @@
     }
 
     /* ==========================================
-       MODAL POP-UP (MURNI CSS `:target`)
-       ========================================== */
-    .btn-modal {
-      display: inline-block;
-      background: rgba(255, 255, 255, 0.2);
-      border: 1px solid var(--glass-border);
-      color: #fff;
-      padding: 10px 22px;
-      border-radius: 25px;
-      text-decoration: none;
-      font-size: 0.85rem;
-      font-weight: 600;
-      transition: all 0.3s ease;
-    }
-
-    .btn-modal:hover {
-      background: #ffffff;
-      color: var(--dark-navy);
-    }
-
-    .modal {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(2, 20, 35, 0.85);
-      backdrop-filter: blur(8px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.4s ease;
-      z-index: 1000;
-    }
-
-    .modal:target {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    .modal-content {
-      background: rgba(5, 102, 141, 0.95);
-      border: 1px solid var(--glass-border);
-      padding: 35px;
-      border-radius: 20px;
-      max-width: 500px;
-      width: 90%;
-      position: relative;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-    }
-
-    .close-btn {
-      position: absolute;
-      top: 15px;
-      right: 20px;
-      font-size: 1.8rem;
-      text-decoration: none;
-      color: rgba(255, 255, 255, 0.7);
-    }
-
-    .close-btn:hover {
-      color: #fff;
-    }
-
-    /* ==========================================
-       WATERMARK / FOOTER (JAWIEER)
+       FOOTER (JAWIEER)
        ========================================== */
     footer {
       background: rgba(2, 40, 60, 0.8);
@@ -392,141 +354,162 @@
 
     @media (max-width: 768px) {
       nav { padding: 15px 20px; }
-      .nav-links { display: none; } /* Sederhana untuk mobile */
-      .hero h1 { font-size: 2.5rem; }
+      .nav-links { display: none; }
+      .hero h1 { font-size: 2.4rem; }
       .container { padding: 50px 15px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- NAVBAR / MENU NAVIGASI -->
+  <!-- MENU NAVIGASI -->
   <nav>
-    <a href="#" class="nav-logo">DERAWAN<span>.</span></a>
+    <a href="#" class="nav-logo">LABUAN CERMIN<span>.</span></a>
     <ul class="nav-links">
-      <li><a href="#destinasi">Destinasi</a></li>
-      <li><a href="#panduan">Panduan</a></li>
+      <li><a href="#penjelasan">Tentang</a></li>
+      <li><a href="#galeri">Galeri 5 Foto</a></li>
+      <li><a href="#panduan">Panduan Wisata</a></li>
     </ul>
   </nav>
 
   <!-- HERO SECTION -->
   <header class="hero">
-    <span class="hero-badge">Kalimantan Timur, Indonesia</span>
-    <h1>Surga Bahari Berau</h1>
-    <p>Jelajahi keajaiban Kepulauan Derawan dan kejernihan Danau Dua Rasa Labuan Cermin yang legendaris.</p>
-    <a href="#destinasi" class="btn-explore">Mulai Jelajah</a>
+    <span class="hero-badge">Berau, Kalimantan Timur</span>
+    <h1>Danau Labuan Cermin</h1>
+    <p>Keajaiban alam danau dua rasa dengan kejernihan air bagaikan kaca kristal.</p>
+    <a href="#penjelasan" class="btn-explore">Pelajari Selengkapnya</a>
     <div class="photo-credit-hero">
-      Foto: <a href="https://kaltimprov.go.id" target="_blank" rel="noopener">Pemprov Kaltim</a>
+      Foto: <a href="https://indonesiakaya.com" target="_blank" rel="noopener">Indonesia Kaya</a>
     </div>
   </header>
 
-  <!-- CONTENT CONTAINER -->
-  <main class="container" id="destinasi">
+  <!-- CONTENT MAIN -->
+  <main class="container">
 
-    <div class="section-title">
-      <h2>Destinasi Unggulan</h2>
-      <p>Pilihan lokasi paling eksotis yang menawarkan pengalaman alam tak terlupakan.</p>
+    <!-- SEKSI PENJELASAN DANAU -->
+    <section id="penjelasan" class="about-box">
+      <h3>Keajaiban Danau Dua Rasa</h3>
+      <p>
+        Danau Labuan Cermin terletak di Desa Labuan Kelambu, Kecamatan Biduk-Biduk, Kabupaten Berau, Kalimantan Timur. Danau ini dikelilingi oleh pepohonan rimbun yang menambah suasana asri dan tenang.
+      </p>
+      <p>
+        Dinamakan <strong>Labuan Cermin</strong> karena air danau ini sangat jernih hingga memantulkan bayangan dengan sangat sempurna bak cermin. Kapal perahu yang melintas di atas danau ini akan terlihat seperti melayang di udara karena saking beningnya air danau tersebut.
+      </p>
+
+      <div class="feature-grid">
+        <div class="feature-item">
+          <h4>🌊 Fenomena Dua Rasa</h4>
+          <p>Memiliki lapisan air tawar di permukaan dan air asin di dasar danau yang tidak bercampur.</p>
+        </div>
+        <div class="feature-item">
+          <h4>🐠 Dua Biota Berbeda</h4>
+          <p>Ikan air tawar hidup di bagian atas, sedangkan ikan laut hidup di bagian dasar danau.</p>
+        </div>
+        <div class="feature-item">
+          <h4>🛶 Efek Melayang</h4>
+          <p>Tingkat kejernihan tinggi membuat perahu terlihat melayang di atas permukaan air.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEKSI GALERI 5 FOTO -->
+    <div class="section-title" id="galeri">
+      <h2>Galeri Foto Danau</h2>
+      <p>5 Sudut Keindahan Danau Labuan Cermin dari Sumber Asli.</p>
     </div>
 
-    <!-- GRID KARTU WISATA -->
-    <section class="grid">
-
-      <!-- KARTU 1: DANAU LABUAN CERMIN -->
-      <article class="glass-card">
-        <div class="card-img">
-          <img src="https://indonesiakaya.com/wp-content/uploads/2020/10/Danau_cantik_ini_terletak_di_Desa_Labuan_Kelambu_di_Kecamatan_Biduk-biduk.jpg" alt="Danau Labuan Cermin">
+    <section class="gallery-grid">
+      
+      <!-- FOTO 1 -->
+      <article class="gallery-card">
+        <div class="gallery-img">
+          <img src="https://indonesiakaya.com/wp-content/uploads/2020/10/Danau_cantik_ini_terletak_di_Desa_Labuan_Kelambu_di_Kecamatan_Biduk-biduk.jpg" alt="Perahu Melayang di Labuan Cermin">
           <div class="photo-credit">Foto: <a href="https://indonesiakaya.com" target="_blank" rel="noopener">Indonesia Kaya</a></div>
         </div>
-        <div class="card-body">
-          <h3>Danau Labuan Cermin</h3>
-          <p>Danau unik dua rasa di Biduk-Biduk dengan air yang sangat jernih bagaikan kaca, memisahkan air tawar di permukaan dan air asin di dasar.</p>
-          <a href="#modal-labuan" class="btn-modal">Lihat Detail</a>
+        <div class="gallery-caption">
+          <h4>1. Sensasi Perahu Melayang</h4>
+          <p>Air yang begitu bening membuat bayangan perahu tercermin sempurna di dasar danau.</p>
         </div>
       </article>
 
-      <!-- KARTU 2: PULAU KAKABAN -->
-      <article class="glass-card">
-        <div class="card-img">
-          <img src="https://indomgb.s3.amazonaws.com/wp-content/uploads/2018/02/22080723/KAKABAN1.jpg" alt="Danau Ubur-Ubur Kakaban">
-          <div class="photo-credit">Foto: <a href="https://mongabay.co.id" target="_blank" rel="noopener">Mongabay</a></div>
+      <!-- FOTO 2 -->
+      <article class="gallery-card">
+        <div class="gallery-img">
+          <img src="https://assets.promediateknologi.id/crop/0x0:0x0/1200x0/webp/photo/2023/06/01/0a1997811bb137f776487367d8352da4-693261039.jpg" alt="Kejernihan Air Labuan Cermin">
+          <div class="photo-credit">Foto: <a href="https://indonesiakaya.com" target="_blank" rel="noopener">Indonesia Kaya</a></div>
         </div>
-        <div class="card-body">
-          <h3>Pulau Kakaban</h3>
-          <p>Rumah bagi jutaan ubur-ubur langka tanpa sengat. Pengalaman berenang bersama ubur-ubur anggun di danau purba pertengahan laut.</p>
-          <a href="#modal-kakaban" class="btn-modal">Lihat Detail</a>
+        <div class="gallery-caption">
+          <h4>2. Air Jernih Dua Rasa</h4>
+          <p>Perpaduan unik antara air tawar di atas dan air asin laut di bawahnya.</p>
         </div>
       </article>
 
-      <!-- KARTU 3: KEPULAUAN DERAWAN -->
-      <article class="glass-card">
-        <div class="card-img">
-          <img src="https://i.ytimg.com/vi/8TZa0jzb_qI/maxresdefault.jpg" alt="Kepulauan Derawan">
-          <div class="photo-credit">Foto: <a href="https://kaltimprov.go.id" target="_blank" rel="noopener">Pemprov Kaltim</a></div>
+      <!-- FOTO 3 -->
+      <article class="gallery-card">
+        <div class="gallery-img">
+          <img src="https://indonesiajuara.asia/wp-content/uploads/2022/12/Danau-Labuan-Cermin-4.webp" alt="Kedalaman Danau Labuan Cermin">
+          <div class="photo-credit">Foto: <a href="https://indonesiakaya.com" target="_blank" rel="noopener">Indonesia Kaya</a></div>
         </div>
-        <div class="card-body">
-          <h3>Kepulauan Derawan</h3>
-          <p>Surga penyelam terluar Indonesia dengan resort di atas air tawar (*water villa*) dan interaksi langsung bersama penyu-penyu hijau besar.</p>
-          <a href="#modal-derawan" class="btn-modal">Lihat Detail</a>
+        <div class="gallery-caption">
+          <h4>3. Dasar Danau Terlihat Jelas</h4>
+          <p>Meskipun memiliki kedalaman 4 hingga 5 meter, dasar danau tetap dapat terlihat dengan mata telanjang.</p>
+        </div>
+      </article>
+
+      <!-- FOTO 4 -->
+      <article class="gallery-card">
+        <div class="gallery-img">
+          <img src="https://blog.bookingtogo.com/wp-content/uploads/2021/12/snorkeling-di-danau-labuan-cermin.jpg" alt="Aktivitas Snorkeling">
+          <div class="photo-credit">Foto: <a href="https://indonesiakaya.com" target="_blank" rel="noopener">Indonesia Kaya</a></div>
+        </div>
+        <div class="gallery-caption">
+          <h4>4. Aktivitas Snorkeling</h4>
+          <p>Pengunjung dapat menyewa pelampung dan peralatan snorkeling untuk menikmati panorama bawah air.</p>
+        </div>
+      </article>
+
+      <!-- FOTO 5 -->
+      <article class="gallery-card">
+        <div class="gallery-img">
+          <img src="https://img.cnt.traveloka.com/tvlk/blog/2025/07/Derawan-Whale-Shark-Labuan-Cermin-Tour-Package-4D3N-f65bb674-6ca8-4b1a-ab8d-62551bb65055.jpeg?tr=q-70,c-at_max,w-500,h-250,dpr-2" alt="Hutan Lindung Biduk-Biduk">
+          <div class="photo-credit">Foto: <a href="https://traveloka.com" target="_blank" rel="noopener">traveloka</a></div>
+        </div>
+        <div class="gallery-caption">
+          <h4>5. Dikelilingi Hutan Asri</h4>
+          <p>Rimbunnya pepohonan hutan lindung menjaga keasrian udara dan kesegaran lokasi danau.</p>
         </div>
       </article>
 
     </section>
 
-    <!-- INFORMASI PANDUAN WISATA -->
+    <!-- PANDUAN KUNJUNGAN -->
     <div class="section-title" id="panduan">
-      <h2>Panduan & Tips Perjalanan</h2>
-      <p>Hal penting yang perlu disiapkan sebelum mengunjungi Kalimantan Timur.</p>
+      <h2>Panduan Kunjungan</h2>
+      <p>Informasi praktis saat berencana berkunjung ke Danau Labuan Cermin.</p>
     </div>
 
     <section class="info-box">
       <details>
-        <summary>✈️ Rute & Akses Transportasi</summary>
-        <p>Penerbangan menuju Bandara Kalimarau (Tanjung Redeb, Berau). Dilanjutkan perjalanan darat menuju Pelabuhan Tanjung Batu (sekitar 2,5 jam) lalu menyewa speedboat menuju Kepulauan Derawan.</p>
+        <summary>📍 Akses Menuju Lokasi</summary>
+        <p>Dari Tanjung Redeb (Ibu Kota Berau), kamu perlu menempuh perjalanan darat selama 6–7 jam menuju Kecamatan Biduk-Biduk. Dari dermaga, perjalanan dilanjutkan menyewa kapal ketinting selama 15 menit menyusuri sungai.</p>
       </details>
 
       <details>
-        <summary>🌊 Waktu Terbaik Berkunjung</summary>
-        <p>Bulan **Maret hingga Oktober** adalah waktu terbaik dengan cuaca cenderung cerah, gelombang laut tenang, dan visibilitas menyelam yang sangat jernih.</p>
+        <summary>🎟️ Tiket & Sewa Perahu</summary>
+        <p>Sewa perahu menuju lokasi danau berkisar antara Rp100.000–Rp200.000 per perahu (pulang-pergi). Peralatan pelampung dan ban juga dapat disewa langsung di tempat.</p>
       </details>
 
       <details>
-        <summary>🤿 Peralatan & Persiapan</summary>
-        <p>Gunakan tabir surya aman terumbu karang (*reef-safe sunscreen*), siapkan kamera *underwater*, serta disarankan tidak memakai kaki katak (*fins*) saat berenang dengan ubur-ubur di Kakaban.</p>
+        <summary>💡 Tips Berkunjung</summary>
+        <p>Datanglah pada pagi hari sekitar pukul 10.00 hingga 12.00 WITA untuk mendapatkan pancaran sinar matahari terbaik yang membuat air danau terlihat berkilau sempurna.</p>
       </details>
     </section>
 
   </main>
 
-  <!-- MODAL POP-UP 1 -->
-  <div id="modal-labuan" class="modal">
-    <div class="modal-content">
-      <a href="#" class="close-btn">&times;</a>
-      <h3 style="color: var(--sand-gold); margin-bottom: 12px;">Danau Labuan Cermin</h3>
-      <p>Danau ini dinamakan Labuan Cermin karena airnya sangat jernih hingga kapal di atasnya terlihat seolah melayang di udara. Fenomena dua rasa terjadi akibat lapisan air tawar di atas dan air laut di bawah yang tidak bercampur.</p>
-    </div>
-  </div>
-
-  <!-- MODAL POP-UP 2 -->
-  <div id="modal-kakaban" class="modal">
-    <div class="modal-content">
-      <a href="#" class="close-btn">&times;</a>
-      <h3 style="color: var(--sand-gold); margin-bottom: 12px;">Danau Ubur-Ubur Kakaban</h3>
-      <p>Satu dari dua tempat di dunia tempat kamu bisa berenang bersama ubur-ubur tidak bersengat. Terdapat 4 spesies ubur-ubur unik yang telah berevolusi terisolasi selama ribuan tahun.</p>
-    </div>
-  </div>
-
-  <!-- MODAL POP-UP 3 -->
-  <div id="modal-derawan" class="modal">
-    <div class="modal-content">
-      <a href="#" class="close-btn">&times;</a>
-      <h3 style="color: var(--sand-gold); margin-bottom: 12px;">Kepulauan Derawan</h3>
-      <p>Terkenal sebagai gugusan pulau karang indah di Berau. Memiliki keanekaragaman hayati bawah laut yang sangat kaya, populer untuk melihat penyu hijau besar dan terumbu karang yang sehat.</p>
-    </div>
-  </div>
-
-  <!-- FOOTER & WATERMARK JAWIEER -->
-  <footer id="kontak">
-    <p>&copy; 2026 Wisata Kepulauan Derawan & Labuan Cermin</p>
+  <!-- FOOTER JAWIEER -->
+  <footer>
+    <p>&copy; 2026 Wisata Danau Labuan Cermin - Berau, Kaltim</p>
     <p>Didesain & Dibuat oleh <span class="author-tag">JAWIEER</span></p>
   </footer>
 
